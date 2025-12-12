@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="theme-color" content="#0d6efd">
+  <title>Условия проката</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      padding-bottom: 80px;
+    }
+
+    /* Bottom navigation bar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 70px;
+      z-index: 100;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .bottom-nav a:active,
+    .bottom-nav a.active {
+      color: #0d6efd;
+    }
+
+    .bottom-nav a:active::before,
+    .bottom-nav a.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 24px;
+      height: 4px;
+      background: #0d6efd;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .bottom-nav i {
+      font-size: 1.5rem;
+    }
+
+    /* Условия аренды секция */
+    .conditions-section {
+      margin-top: 28px;
+      margin-bottom: 40px;
+    }
+
+    .conditions-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 32px;
+      font-weight: 700;
+    }
+
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .condition-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.05), rgba(13, 110, 253, 0.05));
+      border: 1px solid rgba(13, 110, 253, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .condition-card:hover {
+      transform: translateY(-8px);
+      border-color: #0d6efd;
+      box-shadow: 0 12px 30px rgba(13, 110, 253, 0.15);
+    }
+
+    .condition-card-icon {
+      width: 70px;
+      height: 70px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 2rem;
+      color: #0d6efd;
+      box-shadow: 0 4px 15px rgba(13, 110, 253, 0.1);
+    }
+
+    .condition-card h3 {
+      text-align: center;
+      color: #0f172a;
+      margin: 16px 0 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .condition-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .condition-card li {
+      color: #555;
+      font-size: 0.95rem;
+      margin: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .condition-card li:before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #0d6efd;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header container">
+  <div class="brand"><i class="fa-solid fa-car-side"></i> <span>CarRental</span></div>
+  <nav class="nav">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="profile.html">Личный кабинет</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="left">
+      <h1>Условия проката автомобилей</h1>
+      <p>Ознакомьтесь с нашими правилами и требованиями при аренде.</p>
+    </div>
+  </section>
+
+  <!-- Условия аренды -->
+  <section class="conditions-section">
+    <div class="conditions-grid">
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-birthday-cake"></i>
+        </div>
+        <h3>Возрастные ограничения</h3>
+        <ul>
+          <li>Клиент должен быть старше 21 года</li>
+          <li>Водительский стаж должен превышать 3 года</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        <h3>Перечень необходимых документов</h3>
+        <ul>
+          <li>Удостоверение личности</li>
+          <li>Водительские права</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+        <h3>Способы оплаты</h3>
+        <ul>
+          <li>Оплата наличным или безналичным платежом</li>
+          <li>Клиент предварительно оплачивает полный срок</li>
+          <li>Оплата производится до начала поездки</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-vault"></i>
+        </div>
+        <h3>Залог (депозит)</h3>
+        <ul>
+          <li>Зависит от модели автомобиля</li>
+          <li>Возвращается после возврата авто</li>
+          <li>По акту приема-передачи</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-gauge"></i>
+        </div>
+        <h3>Требования по пробегу</h3>
+        <ul>
+          <li>Суточный пробег не более 250 км</li>
+          <li>Выезд загород оплачивается отдельно</li>
+          <li>Перепробег: 1 км от 100 тг</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+        <h3>Территория передвижения</h3>
+        <ul>
+          <li>Только город Астаны и округа</li>
+          <li>Выезд загород - доп. оплата</li>
+          <li>За рулем только арендатор</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-shield"></i>
+        </div>
+        <h3>Условия страхования</h3>
+        <ul>
+          <li>Обязательное страхование (ОГПО)</li>
+          <li>На все автомобили</li>
+          <li>Включено в стоимость</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-hourglass-end"></i>
+        </div>
+        <h3>Арендный срок</h3>
+        <ul>
+          <li>Минимум 2 часа</li>
+          <li>Отсчет с момента акта передачи</li>
+          <li>За опоздание доп. плата за часы</li>
+        </ul>
+      </div>
+
+      <div class="condition-card">
+        <div class="condition-card-icon">
+          <i class="fa-solid fa-concierge-bell"></i>
+        </div>
+        <h3>Дополнительные услуги</h3>
+        <ul>
+          <li>Услуги водителя, телохранителя</li>
+          <li>Переводчик (синхронный/последовательный)</li>
+          <li>Услуги гида (2-3.5 часа)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="bottom-nav">
+  <a href="index.html">
+    <i class="fa-solid fa-house"></i>
+    <span>Главная</span>
+  </a>
+  <a href="catalog.html">
+    <i class="fa-solid fa-car"></i>
+    <span>Автомобили</span>
+  </a>
+  <a href="conditions.html" class="active">
+    <i class="fa-solid fa-book"></i>
+    <span>Условия</span>
+  </a>
+  <a href="profile.html">
+    <i class="fa-solid fa-user"></i>
+    <span>Профиль</span>
+  </a>
+  <a href="#" onclick="toggleMenu(); return false;">
+    <i class="fa-solid fa-bars"></i>
+    <span>Меню</span>
+  </a>
+</nav>
+
+<footer class="site-footer">
+  © CarRental — Все права защищены
+</footer>
+
+<script>
+  function toggleMenu() {
+    alert('Дополнительное меню');
+  }
+
+  // Обновление активной кнопки в меню при навигации
+  document.querySelectorAll('.bottom-nav a').forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add('active');
+    }
+  });
+</script>
+</body>
+<script>
+  function toggleMenu() {
+    alert('Дополнительное меню');
+  }
+
+  // Обновление активной кнопки в меню при навигации
+  document.querySelectorAll('.bottom-nav a').forEach(link => {
+    const href = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    if (href && (href === currentPage || (href === 'index.html' && currentPage === ''))) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+</html>

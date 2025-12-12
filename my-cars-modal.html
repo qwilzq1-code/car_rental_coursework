@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мои автомобили</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      overflow: auto;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      border-radius: 8px;
+      padding: 24px;
+      max-width: 700px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e9ecef;
+      padding-bottom: 12px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #071135;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6c757d;
+    }
+
+    .modal-close:hover {
+      color: #071135;
+    }
+
+    /* Список машин в модале */
+    .my-cars-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .my-car-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .my-car-item img {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .my-car-info {
+      flex: 1;
+    }
+
+    .my-car-info h4 {
+      margin: 0 0 4px 0;
+      font-size: 0.95rem;
+      color: #071135;
+    }
+
+    .my-car-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    .my-car-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .my-car-actions button {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-edit {
+      background: #0d6efd;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background: #0a58ca;
+    }
+
+    .btn-delete {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background: #bb2d3b;
+    }
+
+    /* Форма редактирования */
+    .edit-form {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .edit-form.active {
+      display: block;
+    }
+
+    /* Кнопка входа в личный кабинет */
+    .btn-my-cars {
+      padding: 8px 16px;
+      background: #0d6efd;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .btn-my-cars:hover {
+      background: #0a58ca;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header container">
+    <div class="brand"><i class="fa-solid fa-car-side"></i> <span>CarRental</span></div>
+    <nav class="nav">
+      <a href="catalog.html">Каталог</a>
+      <a href="index.html">Добавить авто</a>
+      <button class="btn-my-cars" onclick="openMyCarModal()"><i class="fa-solid fa-user"></i> Мои машины</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="left">
+        <h1>Мой автопарк</h1>
+        <p>Управляйте своими автомобилями</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно -->
+  <div id="myCarModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Мои автомобили</h2>
+        <button class="modal-close" onclick="closeMyCarModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Список машин -->
+      <div id="myCarsList" class="my-cars-list"></div>
+
+      <!-- Форма редактирования -->
+      <div id="editForm" class="edit-form">
+        <h3>Редактировать автомобиль</h3>
+        <form id="carEditForm">
+          <input type="hidden" id="editCarId">
+
+          <label>Марка:</label>
+          <input id="editBrand" placeholder="Марка" required />
+
+          <label style="margin-top:10px;">Модель:</label>
+          <input id="editModel" placeholder="Модель" required />
+
+          <label style="margin-top:10px;">Год:</label>
+          <input id="editYear" type="number" placeholder="Год" required />
+
+          <label style="margin-top:10px;">Цена / день:</label>
+          <input id="editPrice" type="number" step="0.01" placeholder="Цена / день" required />
+
+          <label style="margin-top:10px;">📸 Ссылки на фото:</label>
+          <input id="editImageURLs" placeholder="https://example.com/img1.jpg, https://example.com/img2.jpg" />
+
+          <hr style="margin:20px 0; border:none; border-top:1px solid #e9ecef;">
+          <label style="font-weight:700;">Технические характеристики</label>
+
+          <label style="margin-top:10px;">Двигатель:</label>
+          <input id="editEngine" placeholder="Бензин / Дизель / Гибрид" />
+
+          <label style="margin-top:10px;">Коробка передач:</label>
+          <input id="editTransmission" placeholder="Механическая / Автоматическая" />
+
+          <label style="margin-top:10px;">Кузов:</label>
+          <input id="editBody" placeholder="Седан / Кроссовер / Хэтчбек" />
+
+          <label style="margin-top:10px;">Класс авто:</label>
+          <input id="editClass" placeholder="Эконом / Комфорт / Премиум" />
+
+          <label style="margin-top:10px;">Мест:</label>
+          <input id="editSeats" type="number" placeholder="5" />
+
+          <div style="margin-top:14px;">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="button" class="btn" style="margin-left:10px;" onclick="cancelEdit()">Отмена</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">CarRental © Все права защищены</footer>
+
+  <script src="my-cars.js"></script>
+</body>
+</html>

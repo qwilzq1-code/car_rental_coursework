@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="theme-color" content="#0d6efd">
+  <title>Вход в личный кабинет</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header container">
+  <div class="brand"><i class="fa-solid fa-car-side"></i> <span>CarRental</span></div>
+  <nav class="nav">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="login.html">Вход</a>
+    <a href="register.html">Регистрация</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="left">
+      <h1>Вход в личный кабинет</h1>
+      <p>Введите ваши данные для входа.</p>
+    </div>
+  </section>
+
+  <section style="margin-top:28px; max-width:560px;">
+    <div class="form" style="padding:20px;">
+      <h2 style="margin-top:0;">Авторизация</h2>
+      
+      <form id="loginForm">
+        <label>Номер телефона:</label>
+        <input type="tel" name="phone" placeholder="+7 (999) 123-45-67" required />
+
+        <label style="margin-top:10px;">Номер паспорта:</label>
+        <input type="text" name="passport" placeholder="1234 567890" required />
+
+        <div style="margin-top:14px; display:flex; gap:8px;">
+          <button class="btn btn-primary" type="submit">Войти</button>
+          <a class="btn btn-ghost" href="register.html">Зарегистрироваться</a>
+        </div>
+      </form>
+
+      <div id="successMessage" style="margin-top:14px; padding:12px; border-radius:8px; background:#d4edda; color:#155724; border:1px solid #c3e6cb; display:none;">
+        ✓ Добро пожаловать! Перенаправляем в личный кабинет...
+      </div>
+
+      <div id="errorMessage" style="margin-top:14px; padding:12px; border-radius:8px; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; display:none;"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  © CarRental — Все права защищены
+</footer>
+
+<script src="js/login.js"></script>
+</body>
+<script>
+  function toggleMenu() {
+    alert('Дополнительное меню');
+  }
+
+  // Обновление активной кнопки в меню при навигации
+  document.querySelectorAll('.bottom-nav a').forEach(link => {
+    const href = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    if (href && (href === currentPage || (href === 'index.html' && currentPage === ''))) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+</html>

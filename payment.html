@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оплата бронирования</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Оплата бронирования</h1>
+
+    <div id="payment-info">
+        <p><strong>Номер бронирования:</strong> <span id="bookingId"></span></p>
+        <p><strong>Сумма к оплате:</strong> <span id="amount"></span> ₽</p>
+    </div>
+
+    <button id="payBtn">Оплатить</button>
+
+    <p id="status"></p>
+
+    <script src="payment.js"></script>
+</body><script>
+  function toggleMenu() {
+    alert('Дополнительное меню');
+  }
+
+  // Обновление активной кнопки в меню при навигации
+  document.querySelectorAll('.bottom-nav a').forEach(link => {
+    const href = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    if (href && (href === currentPage || (href === 'index.html' && currentPage === ''))) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+</script>
+</html>

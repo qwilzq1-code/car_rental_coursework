@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="theme-color" content="#0d6efd">
+  <title>Личный кабинет</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header container">
+    <div class="brand"><i class="fa-solid fa-user"></i> <span>Личный кабинет</span></div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="profile.html">Личный кабинет</a>
+      <a href="javascript:logout()" style="color:#dc3545;">Выход</a>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:18px;">
+    <h2>Мои бронирования</h2>
+    <div id="bookings" class="grid" style="margin-top:12px;"></div>
+  </main>
+<nav class="bottom-nav">
+  <a href="index.html">
+    <i class="fa-solid fa-house"></i>
+    <span>Главная</span>
+  </a>
+  <a href="catalog.html">
+    <i class="fa-solid fa-car"></i>
+    <span>Автомобили</span>
+  </a>
+  <a href="conditions.html" class="active">
+    <i class="fa-solid fa-book"></i>
+    <span>Условия</span>
+  </a>
+  <a href="profile.html">
+    <i class="fa-solid fa-user"></i>
+    <span>Профиль</span>
+  </a>
+  <a href="#" onclick="toggleMenu(); return false;">
+    <i class="fa-solid fa-bars"></i>
+    <span>Меню</span>
+  </a>
+</nav>
+  <footer class="site-footer">
+    © CarRental — Все права защищены
+  </footer>
+
+  <script src="js/profile.js"></script>
+</body><script>
+  function toggleMenu() {
+    alert('Дополнительное меню');
+  }
+
+  // Обновление активной кнопки в меню при навигации
+  document.querySelectorAll('.bottom-nav a').forEach(link => {
+    const href = link.getAttribute('href');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    if (href && (href === currentPage || (href === 'index.html' && currentPage === ''))) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+</html>
